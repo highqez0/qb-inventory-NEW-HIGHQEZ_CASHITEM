@@ -364,6 +364,12 @@ function ClearInventory(source, filterItems)
         TriggerEvent('qb-log:server:CreateLog', 'playerinventory', 'ClearInventory', 'red', logMessage)
         if Player(source).state.inv_busy then TriggerClientEvent('qb-inventory:client:updateInventory', source) end
     end
+
+    -- Added Code (highqez_cashitem)
+    if player and player.PlayerData and player.PlayerData.source then
+        TriggerEvent('highqez_cashitem:server:ClearInventory', player.PlayerData.source)
+    end
+
 end
 
 exports('ClearInventory', ClearInventory)
@@ -655,6 +661,12 @@ function AddItem(identifier, item, amount, slot, info, reason)
         '**Reason:** ' .. addReason .. '\n' ..
         '**Resource:** ' .. resourceName
     )
+
+    -- Added Code (highqez_cashitem)
+    if player and player.PlayerData and player.PlayerData.source then
+        TriggerEvent('highqez_cashitem:server:AddItem', player.PlayerData.source, item, amount)
+    end
+
     return true
 end
 
@@ -727,6 +739,12 @@ function RemoveItem(identifier, item, amount, slot, reason)
         '**Reason:** ' .. removeReason .. '\n' ..
         '**Resource:** ' .. resourceName
     )
+
+    -- Added Code (highqez_cashitem)
+    if player and player.PlayerData and player.PlayerData.source then
+        TriggerEvent('highqez_cashitem:server:RemoveItem', player.PlayerData.source, item, amount)
+    end
+
     return true
 end
 
